@@ -1,8 +1,8 @@
-package com.nick.wood.game_engine.gcs_model.ces;
+package com.nick.wood.game_engine.gcs_model.gcs;
 
 import com.nick.wood.game_engine.gcs_model.bus.ComponentCreateEvent;
-import com.nick.wood.game_engine.gcs_model.generated.ComponentType;
 import com.nick.wood.game_engine.event_bus.busses.GameBus;
+import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +13,9 @@ public class Registry {
 	private final GameBus gameBus;
 
 	public Registry(GameBus gameBus) {
-		componentMap.put(ComponentType.GEOMETRY, new ArrayList<>());
-		componentMap.put(ComponentType.TRANSFORM, new ArrayList<>());
+		for (ComponentType value : ComponentType.values()) {
+			componentMap.put(value, new ArrayList<>());
+		}
 		this.gameBus = gameBus;
 	}
 

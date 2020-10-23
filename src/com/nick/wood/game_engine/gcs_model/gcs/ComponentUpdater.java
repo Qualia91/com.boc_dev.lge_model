@@ -1,4 +1,4 @@
-package com.nick.wood.game_engine.gcs_model.ces;
+package com.nick.wood.game_engine.gcs_model.gcs;
 
 import com.nick.wood.game_engine.gcs_model.bus.ComponentDestroyEvent;
 import com.nick.wood.game_engine.gcs_model.bus.ComponentUpdateEvent;

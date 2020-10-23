@@ -1,6 +1,6 @@
-package com.nick.wood.game_engine.gcs_model.ces;
+package com.nick.wood.game_engine.gcs_model.gcs;
 
-import com.nick.wood.game_engine.gcs_model.generated.ComponentType;
+import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 
 import java.util.*;
 

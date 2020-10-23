@@ -1,8 +1,8 @@
 package com.nick.wood.game_engine.gcs_model.systems;
 
-import com.nick.wood.game_engine.gcs_model.ces.Component;
-import com.nick.wood.game_engine.gcs_model.ces.Registry;
-import com.nick.wood.game_engine.gcs_model.generated.ComponentType;
+import com.nick.wood.game_engine.gcs_model.gcs.Component;
+import com.nick.wood.game_engine.gcs_model.gcs.Registry;
+import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 
 import java.util.ArrayList;
 

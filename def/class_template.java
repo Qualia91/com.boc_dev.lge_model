@@ -1,36 +1,35 @@
 
-package <PACKAGE>.generated;
+package PACKAGE;
 
-<IMPORTS>
+IMPORTS
 
-<CLASS_COMMENT>
-public class <TYPE>Object extends Component {
+/** CLASS_COMMENT
+*/
+public class TYPEObject extends Component {
 
-	<FIELDS>
+FIELDS
 
-	public <TYPE>Object(<CONSTRUCTION_PARAMS>) {
-		super(ComponentType.<COMPONENT_TYPE>, name);
-		<FIELDS_INITS>
+	public TYPEObject(String name, CONSTRUCTION_PARAMS) {
+		super(ComponentType.COMPONENT_T, name);
+FIELD_INITS
 		DESCRIPTOR
-				.addFieldDescriptor(<FIELD_DESCRIPTOR>);
+FIELD_DESCRIPTOR_CREATION;
 	}
 
-	<GETTERS>
-
-	<SETTERS>
+GETTERS_AND_SETTERS
 
 	@Override
-	public <TYPE>Updater getUpdater(Registry registry) {
-		return new <TYPE>Updater(registry, DESCRIPTOR, this);
+	public TYPEUpdater getUpdater(Registry registry) {
+		return new TYPEUpdater(registry, DESCRIPTOR, this);
 	}
 
-	public static class <TYPE>Updater extends ComponentUpdater {
+	public static class TYPEUpdater extends ComponentUpdater {
 
-		public <TYPE>Updater(Registry registry, ComponentDescriptor componentDescriptor, <TYPE>Object object) {
+		public TYPEUpdater(Registry registry, ComponentDescriptor componentDescriptor, TYPEObject object) {
 			super(registry, componentDescriptor, object);
 		}
 		
-		<UPDATERS>
+UPDATERS
 
 	}
 }

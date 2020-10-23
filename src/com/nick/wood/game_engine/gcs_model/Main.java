@@ -1,6 +1,6 @@
 package com.nick.wood.game_engine.gcs_model;
 
-import com.nick.wood.game_engine.gcs_model.ces.Component;
+import com.nick.wood.game_engine.gcs_model.gcs.Component;
 import com.nick.wood.game_engine.gcs_model.generated.TransformObject;
 import com.nick.wood.game_engine.gcs_model.systems.GcsSystem;
 import com.nick.wood.game_engine.gcs_model.systems.TestGcsSystem;

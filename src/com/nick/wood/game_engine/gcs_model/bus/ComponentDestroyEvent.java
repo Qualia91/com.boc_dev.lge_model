@@ -1,6 +1,6 @@
 package com.nick.wood.game_engine.gcs_model.bus;
 
-import com.nick.wood.game_engine.gcs_model.ces.Component;
+import com.nick.wood.game_engine.gcs_model.gcs.Component;
 import com.nick.wood.game_engine.event_bus.interfaces.Event;
 
 public class ComponentDestroyEvent implements Event<Component> {

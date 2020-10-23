@@ -1,0 +1,252 @@
+
+local folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\components\\"
+local enums_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\enums\\"
+local package = "com.nick.wood.game_engine.gcs_model.generated.components"
+local enums_package = "com.nick.wood.game_engine.gcs_model.generated.enums"
+
+import_locations = { 
+  QuaternionF = "com.nick.wood.maths.objects.QuaternionF",
+  QuaternionD = "com.nick.wood.maths.objects.QuaternionD",
+  Vec3f = "com.nick.wood.maths.objects.vector.Vec3f",
+  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d",
+  RigidBodyObjectType = "com.nick.wood.game_engine.gcs_model.generated.objects.RigidBodyObjectType",
+  LightingType = "com.nick.wood.game_engine.gcs_model.generated.objects.LightingType",
+}
+
+-- components table
+components = require "components"
+enums = require "enums"
+my_io = require "my_io"
+
+
+-- tests the functions above
+local file = 'class_template.java'
+local lines = my_io.lines_from(file)
+
+function firstToUpper(str)
+    return (str:gsub("^%l", string.upper))
+end
+
+
+function generate_fields(fields)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      return_string = return_string .. "\t// " .. v.comment .. "\n"
+      return_string = return_string .. "\tprivate " .. v.type .. " " .. k .. ";\n"
+      
+  end
+  
+  return return_string
+end
+
+function generate_construction_params(fields)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      return_string = return_string .. v.type .. " " .. k .. ", "
+      
+  end
+  
+  return return_string:sub(1, -3)
+end
+
+function generate_field_inits(fields)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      return_string = return_string .. "\t\tthis." .. k .. " = " .. k .. ";\n"
+      
+  end
+  
+  return return_string
+end
+
+function generate_field_descriptor_creation(fields)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      return_string = return_string .. "\t\t\t.addFieldDescriptor(\"" .. k .. "\", this::set" .. firstToUpper(k) .. ")\n" 
+      
+  end
+  
+  return return_string:sub(1, -2)
+end
+
+function generate_getters_and_setters(fields)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      -- getter
+      return_string = return_string .. "\tpublic " .. v.type .. " get" .. firstToUpper(k) .. "() {\n" 
+      return_string = return_string .. "\t\treturn " .. k .. ";\n\t}\n\n"
+      
+      -- setter
+      return_string = return_string .. "\tprivate void set" .. firstToUpper(k) .. "(" .. v.type .. " " .. k .. ") {\n"
+      return_string = return_string .. "\t\tthis." .. k .. " = " .. k .. ";\n\t}\n\n"
+      
+      
+  end
+  
+  return return_string:sub(1, -2)
+end
+
+function generate_updaters(fields, class_name)
+  
+  local return_string = ""
+  
+  for k, v in pairs(fields) do
+      
+      return_string = return_string .. "\t\tpublic " .. class_name .. "Updater set" .. firstToUpper(k) .. "(" .. v.type .. " " .. k .. ") {\n"
+      
+      
+      return_string = return_string .. "\t\t\tsetValue((" .. class_name .. "Object obj) -> obj.set" .. firstToUpper(k) .. "(" .. k .. "), \"" .. k .. "\");\n"
+      
+      return_string = return_string .. "\t\t\treturn this;\n\t\t}\n\n"
+      
+      
+  end
+  
+  return return_string:sub(1, -2)
+end
+
+function generate_imports(fields, import_locations)
+  
+  import_needed = {}
+  
+  for k, v in pairs(fields) do
+      
+      import_needed[v.type] = true
+      
+  end
+  
+  return_string = "import com.nick.wood.game_engine.gcs_model.gcs.*;\n"
+  return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.objects.*;\n"
+  return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.enums.*;\n"
+  
+  
+  for k, v in pairs(import_needed) do
+    
+    if import_locations[k] then
+    
+      return_string = return_string .. "import " .. import_locations[k] .. ";\n"
+    
+    end
+      
+  end
+    
+  
+  return return_string
+end
+
+
+function generate_component_class(component_name, component, lines, folder)
+  
+  -- generate fields
+  field_string = generate_fields(component.fields)
+  construction_params_string = generate_construction_params(component.fields)
+  field_inits_string = generate_field_inits(component.fields)
+  field_descriptor_creation_string = generate_field_descriptor_creation(component.fields)
+  getters_and_setters = generate_getters_and_setters(component.fields)
+  updaters_string = generate_updaters(component.fields, component_name)
+  imports_string = generate_imports(component.fields, import_locations)
+
+  -- read template and replace tags with current component data
+  local new_file_text = ""
+  for k,v in pairs(lines) do
+    
+    new_file_text = new_file_text .. 
+      v
+        :gsub("TYPE", component_name)
+        :gsub("PACKAGE", package)
+        :gsub("CLASS_COMMENT", component.comment)
+        :gsub("COMPONENT_T", component_name:upper())
+        :gsub("CONSTRUCTION_PARAMS", construction_params_string)
+        :gsub("FIELDS", field_string)
+        :gsub("FIELD_INITS", field_inits_string)
+        :gsub("FIELD_DESCRIPTOR_CREATION", field_descriptor_creation_string)
+        :gsub("GETTERS_AND_SETTERS", getters_and_setters)
+        :gsub("UPDATERS", updaters_string)
+        :gsub("IMPORTS", imports_string)
+      .. "\n"
+  end
+
+  -- Opens a file in append mode
+  file = io.open("..\\" .. folder .. component_name .. "Object.java", "w")
+
+  io.output(file)
+
+  -- appends a word test to the last line of the file
+  io.write(new_file_text)
+
+  -- closes the open file
+  file.close()
+  
+end
+
+function generate_component_enum(class_name, enums_names, enums_package)
+  
+  enum_file_string = "package " .. enums_package .. ";\n\npublic enum " .. class_name .. " {\n"
+  
+  for name_count = 1, #enums_names do
+  
+    enum_file_string = enum_file_string .. "\t" .. enums_names[name_count]:upper() .. ",\n"
+  
+  end
+
+  return enum_file_string:sub(1, -3) .. "\n}"
+    
+end
+
+enum_file_string = "package " .. package .. ";\n\npublic enum ComponentType {\n"
+
+
+-- loop over components in components tabel
+for k, v in pairs(components) do
+  generate_component_class(k, v, lines, folder)
+  
+  
+  enum_file_string = enum_file_string .. "\t" .. k:upper() .. ",\n"
+  
+end
+
+
+enum_file_string = enum_file_string:sub(1, -3) .. "\n}"
+
+-- Opens a file in append mode
+file = io.open("..\\" .. folder .. "\\ComponentType.java", "w")
+
+io.output(file)
+
+-- appends a word test to the last line of the file
+io.write(enum_file_string)
+
+-- closes the open file
+file.close()
+
+
+-- generate enums
+for k, v in pairs(enums) do
+  enum_file_string = generate_component_enum(k, v, enums_package)
+  
+  -- Opens a file in append mode
+  file = io.open("..\\" .. enums_folder .. "\\" .. k .. ".java", "w")
+
+  io.output(file)
+
+  -- appends a word test to the last line of the file
+  io.write(enum_file_string)
+
+  -- closes the open file
+  file.close()
+end
