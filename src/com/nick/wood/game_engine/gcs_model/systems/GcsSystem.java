@@ -7,6 +7,6 @@ import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 import java.util.ArrayList;
 
 public interface GcsSystem<T extends Component> {
-	void update(long time, ArrayList<T> transformComponents, Registry registry);
+	void update(long time, ArrayList<T> components, Registry registry);
 	ComponentType getTypeSystemUpdates();
 }

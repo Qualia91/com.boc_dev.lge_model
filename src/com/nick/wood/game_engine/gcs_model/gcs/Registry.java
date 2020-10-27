@@ -1,7 +1,10 @@
 package com.nick.wood.game_engine.gcs_model.gcs;
 
+import com.nick.wood.game_engine.event_bus.events.RenderEvent;
 import com.nick.wood.game_engine.gcs_model.bus.ComponentCreateEvent;
 import com.nick.wood.game_engine.event_bus.busses.GameBus;
+import com.nick.wood.game_engine.gcs_model.bus.RenderableUpdateEvent;
+import com.nick.wood.game_engine.gcs_model.bus.RenderableUpdateEventType;
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 
 import java.util.ArrayList;
@@ -24,6 +27,13 @@ public class Registry {
 	}
 
 	public void deleteComponent(Component component) {
+
+		// if this is a renderable object, send a message to game loop to notify render conversion system
+		// when appropriate
+		if (component.getComponentType().isRender()) {
+			gameBus.dispatch(new RenderableUpdateEvent(component, RenderableUpdateEventType.DESTROY));
+		}
+
 		// remove parent (which removes child)
 		component.removeParent();
 		// remove component from map
@@ -40,6 +50,13 @@ public class Registry {
 	}
 
 	public void createComponent(Component component) {
+
+		// if this is a renderable object, send a message to game loop to notify render conversion system
+		// when appropriate
+		if (component.getComponentType().isRender()) {
+			gameBus.dispatch(new RenderableUpdateEvent(component, RenderableUpdateEventType.CREATE));
+		}
+
 		// add component
 		componentMap.get(component.getComponentType()).add(component);
 	}

@@ -1,9 +1,6 @@
-package com.nick.wood.game_engine.gcs_model;
+package com.nick.wood.game_engine.gcs_model.gcs;
 
-import com.nick.wood.game_engine.gcs_model.bus.ComponentCreateEvent;
-import com.nick.wood.game_engine.gcs_model.bus.ComponentDestroyEvent;
-import com.nick.wood.game_engine.gcs_model.bus.ComponentEventType;
-import com.nick.wood.game_engine.gcs_model.bus.ComponentUpdateEvent;
+import com.nick.wood.game_engine.gcs_model.bus.*;
 import com.nick.wood.game_engine.gcs_model.gcs.Component;
 import com.nick.wood.game_engine.gcs_model.gcs.Registry;
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
@@ -16,7 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class GameLoop implements Subscribable {
+public class RegistryUpdater implements Subscribable {
 
 	private final HashSet<Class> supported = new HashSet<>();
 
@@ -30,7 +27,7 @@ public class GameLoop implements Subscribable {
 	private final ArrayList<ComponentCreateEvent> drainToListCreate = new ArrayList<>();
 	private final ArrayList<ComponentDestroyEvent> drainToListDestroy = new ArrayList<>();
 
-	public GameLoop(ArrayList<GcsSystem<Component>> gcsSystems) {
+	public RegistryUpdater(ArrayList<GcsSystem<Component>> gcsSystems) {
 
 		supported.add(ComponentUpdateEvent.class);
 		supported.add(ComponentCreateEvent.class);
@@ -47,30 +44,20 @@ public class GameLoop implements Subscribable {
 		return registry;
 	}
 
-	public void run() {
+	public void run(long timestep) {
 
-		try {
-			long timestep = 0;
-			while (true) {
-				// run systems
-				for (GcsSystem<Component> gcsSystem : gcsSystems) {
-					gcsSystem.update(timestep, registry.getComponentMap().get(gcsSystem.getTypeSystemUpdates()), registry);
-				}
-
-				// create events
-				applyCreateEvents();
-				// destroy events
-				applyDestroyEvents();
-				// update events
-				applyUpdateEvents();
-
-				timestep++;
-
-				System.out.println(registry.getComponentMap().get(ComponentType.TRANSFORM).size());
-			}
-		} catch (Exception e) {
-			System.out.println(e);
+		// run systems
+		for (GcsSystem<Component> gcsSystem : gcsSystems) {
+			gcsSystem.update(timestep, registry.getComponentMap().get(gcsSystem.getTypeSystemUpdates()), registry);
 		}
+
+		// create events
+		applyCreateEvents();
+		// destroy events
+		applyDestroyEvents();
+		// update events
+		applyUpdateEvents();
+
 	}
 
 	private void applyCreateEvents() {
@@ -103,6 +90,13 @@ public class GameLoop implements Subscribable {
 			for (int valueIndex = 0; valueIndex < componentUpdateEvent.getChangeSet().getValues().length; valueIndex++) {
 				if (componentUpdateEvent.getChangeSet().getValues()[valueIndex] != null) {
 					componentUpdateEvent.getChangeSet().getValues()[valueIndex].accept(componentUpdateEvent.getData());
+				}
+				componentUpdateEvent.getData().setDirty();
+
+				if (componentUpdateEvent.getData().getComponentType().equals(ComponentType.TRANSFORM)) {
+					registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_TRANSFORM));
+				} else if (componentUpdateEvent.getData().getComponentType().isRender()) {
+					registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_RENDERABLE));
 				}
 			}
 		}

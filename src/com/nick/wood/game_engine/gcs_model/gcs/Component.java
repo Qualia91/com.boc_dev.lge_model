@@ -8,9 +8,10 @@ public abstract class Component {
 
 	private final String name;
 	private final UUID uuid;
+	private boolean dirty = true;
 	private final ComponentType componentType;
 	private Component parent;
-	private ArrayList<Component> children = new ArrayList<>();
+	private final ArrayList<Component> children = new ArrayList<>();
 
 	protected final ComponentDescriptor DESCRIPTOR =
 			new ComponentDescriptor()
@@ -68,4 +69,15 @@ public abstract class Component {
 		return Collections.unmodifiableList(children);
 	}
 
+	public void setDirty() {
+		this.dirty = true;
+	}
+
+	public void setClean() {
+		this.dirty = false;
+	}
+
+	public boolean isDirty() {
+		return dirty;
+	}
 }

@@ -1,7 +1,8 @@
 package com.nick.wood.game_engine.gcs_model;
 
 import com.nick.wood.game_engine.gcs_model.gcs.Component;
-import com.nick.wood.game_engine.gcs_model.generated.TransformObject;
+import com.nick.wood.game_engine.gcs_model.gcs.RegistryUpdater;
+import com.nick.wood.game_engine.gcs_model.generated.components.TransformObject;
 import com.nick.wood.game_engine.gcs_model.systems.GcsSystem;
 import com.nick.wood.game_engine.gcs_model.systems.TestGcsSystem;
 import com.nick.wood.game_engine.event_bus.subscribables.DebugSubscribable;
@@ -34,17 +35,16 @@ public class Main {
         TestGcsSystem testSystem = new TestGcsSystem();
         gcsSystems.add((GcsSystem) testSystem);
 
-        GameLoop gameLoop = new GameLoop(gcsSystems);
+        RegistryUpdater registryUpdater = new RegistryUpdater(gcsSystems);
 
         DebugSubscribable debugSubscribable = new DebugSubscribable();
 
-        gameLoop.getRegistry().createComponent(transformObject);
+        registryUpdater.getRegistry().createComponent(transformObject);
 
         //gameLoop.getRegistry().getBus().register(debugSubscribable);
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        executorService.submit(gameLoop::run);
         executorService.submit(debugSubscribable);
     }
 }

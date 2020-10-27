@@ -3,6 +3,7 @@ local components =
 	{
 		Transform = {
 			comment = "Transform of an object. Will affect the objects underneath it.",
+      render = "false",
 			fields = {
 				position = {
 					comment = "positon component of transform",
@@ -20,6 +21,7 @@ local components =
 		},
 		RigidBody = {
 			comment = "Component that gets affected by the rigid body system. It must be under a transform, and thats the one that gets transformed.",
+      render = "false",
 			fields = {
 				mass = {
 					comment = "Mass in kg's of entity",
@@ -28,14 +30,6 @@ local components =
 				dimensions = {
 					comment = "dimensions of entity",
 					type = "Vec3d",
-				},
-				origin = {
-					comment = "origin of entity",
-					type = "Vec3d",
-				},
-				rotation = {
-					comment = "rotation component of entity",
-					type = "QuaternionD",
 				},
 				linearMomentum = {
 					comment = "linearMomentum of entity",
@@ -53,6 +47,7 @@ local components =
 		},
 		Light = {
 			comment = "Component that gets affected by the rigid body system. It must be under a transform, and thats the one that gets transformed.",
+      render = "true",
 			fields = {
 				lightingType = {
 					comment = "light type",
@@ -90,6 +85,7 @@ local components =
 		},
 		SkyBox = {
 			comment = "",
+      render = "true",
 			fields = {
 				skyboxType = {
 					comment = "Type of geometry used to make sykbox. Can be CUBE, SPHERE, or MODEL",
@@ -103,6 +99,7 @@ local components =
 		},
 		Camera = {
 			comment = "",
+      render = "true",
 			fields = {
 				near = {
 					comment = "",
@@ -132,6 +129,7 @@ local components =
 		},
 		Geometry = {
 			comment = "",
+      render = "true",
 			fields = {
 				geometryType = {
 					comment = "",

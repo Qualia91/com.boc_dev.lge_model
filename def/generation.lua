@@ -8,9 +8,7 @@ import_locations = {
   QuaternionF = "com.nick.wood.maths.objects.QuaternionF",
   QuaternionD = "com.nick.wood.maths.objects.QuaternionD",
   Vec3f = "com.nick.wood.maths.objects.vector.Vec3f",
-  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d",
-  RigidBodyObjectType = "com.nick.wood.game_engine.gcs_model.generated.objects.RigidBodyObjectType",
-  LightingType = "com.nick.wood.game_engine.gcs_model.generated.objects.LightingType",
+  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d"
 }
 
 -- components table
@@ -215,13 +213,20 @@ enum_file_string = "package " .. package .. ";\n\npublic enum ComponentType {\n"
 for k, v in pairs(components) do
   generate_component_class(k, v, lines, folder)
   
-  
-  enum_file_string = enum_file_string .. "\t" .. k:upper() .. ",\n"
+  enum_file_string = enum_file_string .. "\t" .. k:upper() .. "(" .. v.render .. "),\n"
   
 end
 
 
-enum_file_string = enum_file_string:sub(1, -3) .. "\n}"
+enum_file_string = enum_file_string:sub(1, -3) .. ";\n\n"
+enum_file_string = enum_file_string .. "\tprivate final boolean render;\n\n"
+enum_file_string = enum_file_string .. "\tComponentType(boolean render) {\n"
+enum_file_string = enum_file_string .. "\t\tthis.render = render;\n"
+enum_file_string = enum_file_string .. "\t}\n\n"
+enum_file_string = enum_file_string .. "\tpublic boolean isRender() {\n"
+enum_file_string = enum_file_string .. "\t\treturn render;\n"
+enum_file_string = enum_file_string .. "\t}\n"
+enum_file_string = enum_file_string .. "}"
 
 -- Opens a file in append mode
 file = io.open("..\\" .. folder .. "\\ComponentType.java", "w")
