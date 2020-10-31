@@ -1,30 +1,35 @@
 package com.nick.wood.game_engine.gcs_model.gcs;
 
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
+import com.nick.wood.maths.objects.matrix.Matrix4f;
 
 import java.util.*;
 
 public abstract class Component {
 
+	protected final Registry registry;
 	private final String name;
 	private final UUID uuid;
 	private boolean dirty = true;
 	private final ComponentType componentType;
 	private Component parent;
 	private final ArrayList<Component> children = new ArrayList<>();
+	private Matrix4f globalTransform = Matrix4f.Identity;
 
 	protected final ComponentDescriptor DESCRIPTOR =
 			new ComponentDescriptor()
 					.addFieldDescriptor("parent", this::setParent);
 
 
-	public Component(ComponentType componentType, String name) {
+	public Component(ComponentType componentType, String name, Registry registry) {
+		this.registry = registry;
+		this.registry.registerComponent(this);
 		this.componentType = componentType;
 		this.name = name;
 		this.uuid = UUID.randomUUID();
 	}
 
-	public abstract ComponentUpdater getUpdater(Registry registry);
+	public abstract ComponentUpdater getUpdater();
 
 	void setParent(Component parent) {
 		this.parent = parent;
@@ -79,5 +84,29 @@ public abstract class Component {
 
 	public boolean isDirty() {
 		return dirty;
+	}
+
+	public void createRenderable(RenderVisitor renderVisitor) {
+		// implement in renderables
+	}
+
+	public void updateRenderable(RenderVisitor renderVisitor, Matrix4f matrix4f) {
+		// implement in renderables
+	}
+
+	public void deleteRenderable(RenderVisitor renderVisitor) {
+		// implement in renderables
+	}
+
+	public void setGlobalTransform(Matrix4f globalTransform) {
+		this.globalTransform = globalTransform;
+	}
+
+	public Matrix4f getGlobalTransform() {
+		return this.globalTransform;
+	}
+
+	protected Registry getRegistry() {
+		return registry;
 	}
 }

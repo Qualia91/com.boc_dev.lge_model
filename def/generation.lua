@@ -8,7 +8,9 @@ import_locations = {
   QuaternionF = "com.nick.wood.maths.objects.QuaternionF",
   QuaternionD = "com.nick.wood.maths.objects.QuaternionD",
   Vec3f = "com.nick.wood.maths.objects.vector.Vec3f",
-  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d"
+  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d",
+  Matrix4f = "com.nick.wood.maths.objects.matrix.Matrix4f",
+  UUID = "java.util.UUID"
 }
 
 -- components table
@@ -118,7 +120,7 @@ function generate_updaters(fields, class_name)
   return return_string:sub(1, -2)
 end
 
-function generate_imports(fields, import_locations)
+function generate_imports(fields, import_locations, render)
   
   import_needed = {}
   
@@ -131,6 +133,17 @@ function generate_imports(fields, import_locations)
   return_string = "import com.nick.wood.game_engine.gcs_model.gcs.*;\n"
   return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.objects.*;\n"
   return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.enums.*;\n"
+  
+  if render == "true" then
+    
+    if not string.find(return_string, "com.nick.wood.maths.objects.matrix.Matrix4f") then
+  
+      return_string = return_string .. "import com.nick.wood.maths.objects.matrix.Matrix4f;\n"
+    
+    end
+    
+  end
+  
   
   
   for k, v in pairs(import_needed) do
@@ -157,7 +170,22 @@ function generate_component_class(component_name, component, lines, folder)
   field_descriptor_creation_string = generate_field_descriptor_creation(component.fields)
   getters_and_setters = generate_getters_and_setters(component.fields)
   updaters_string = generate_updaters(component.fields, component_name)
-  imports_string = generate_imports(component.fields, import_locations)
+  imports_string = generate_imports(component.fields, import_locations, component.render)
+  
+  update_render_function = ""
+  
+  if component.render == "true" then
+    update_render_function = update_render_function .. "\n\n\t@Override\n"
+    update_render_function = update_render_function .. "\tpublic void createRenderable(RenderVisitor renderVisitor) {\n"
+    update_render_function = update_render_function .. "\t\trenderVisitor.sendCreateUpdate(this);\n\t}\n\n"
+    update_render_function = update_render_function .. "\n\n\t@Override\n"
+    update_render_function = update_render_function .. "\tpublic void updateRenderable(RenderVisitor renderVisitor, Matrix4f translation) {\n"
+    update_render_function = update_render_function .. "\t\trenderVisitor.sendInstanceUpdate(this, translation);\n\t}\n"
+    update_render_function = update_render_function .. "\n\n\t@Override\n"
+    update_render_function = update_render_function .. "\tpublic void deleteRenderable(RenderVisitor renderVisitor) {\n"
+    update_render_function = update_render_function .. "\t\trenderVisitor.sendDeleteUpdate(this);\n\t}\n"
+    
+  end
 
   -- read template and replace tags with current component data
   local new_file_text = ""
@@ -176,7 +204,9 @@ function generate_component_class(component_name, component, lines, folder)
         :gsub("GETTERS_AND_SETTERS", getters_and_setters)
         :gsub("UPDATERS", updaters_string)
         :gsub("IMPORTS", imports_string)
-      .. "\n"
+        :gsub("UPDATERENDERABLEFUNCTION", update_render_function)
+        .. "\n"
+        
   end
 
   -- Opens a file in append mode

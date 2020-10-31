@@ -18,24 +18,25 @@ public class RegistryUpdater implements Subscribable {
 	private final HashSet<Class> supported = new HashSet<>();
 
 	private final Registry registry;
+	private final GameBus gameBus;
 	private final ArrayList<GcsSystem<Component>> gcsSystems;
 
-	private final ArrayBlockingQueue<ComponentUpdateEvent> changeEventsQueue = new ArrayBlockingQueue<>(100);
-	private final ArrayBlockingQueue<ComponentCreateEvent> createEventsQueue = new ArrayBlockingQueue<>(100);
-	private final ArrayBlockingQueue<ComponentDestroyEvent> destroyEventsQueue = new ArrayBlockingQueue<>(100);
+	private final ArrayBlockingQueue<ComponentUpdateEvent> changeEventsQueue = new ArrayBlockingQueue<>(100000);
+	private final ArrayBlockingQueue<ComponentCreateEvent> createEventsQueue = new ArrayBlockingQueue<>(100000);
+	private final ArrayBlockingQueue<ComponentDestroyEvent> destroyEventsQueue = new ArrayBlockingQueue<>(100000);
 	private final ArrayList<ComponentUpdateEvent> drainToListChange = new ArrayList<>();
 	private final ArrayList<ComponentCreateEvent> drainToListCreate = new ArrayList<>();
 	private final ArrayList<ComponentDestroyEvent> drainToListDestroy = new ArrayList<>();
 
-	public RegistryUpdater(ArrayList<GcsSystem<Component>> gcsSystems) {
+	public RegistryUpdater(ArrayList<GcsSystem<Component>> gcsSystems, Registry registry, GameBus gameBus) {
 
 		supported.add(ComponentUpdateEvent.class);
 		supported.add(ComponentCreateEvent.class);
 		supported.add(ComponentDestroyEvent.class);
 
-		GameBus gameBus = new GameBus();
+		this.registry = registry;
+		this.gameBus = gameBus;
 		gameBus.register(this);
-		this.registry = new Registry(gameBus);
 		this.gcsSystems = gcsSystems;
 
 	}
@@ -91,13 +92,13 @@ public class RegistryUpdater implements Subscribable {
 				if (componentUpdateEvent.getChangeSet().getValues()[valueIndex] != null) {
 					componentUpdateEvent.getChangeSet().getValues()[valueIndex].accept(componentUpdateEvent.getData());
 				}
-				componentUpdateEvent.getData().setDirty();
+			}
+			componentUpdateEvent.getData().setDirty();
 
-				if (componentUpdateEvent.getData().getComponentType().equals(ComponentType.TRANSFORM)) {
-					registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_TRANSFORM));
-				} else if (componentUpdateEvent.getData().getComponentType().isRender()) {
-					registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_RENDERABLE));
-				}
+			if (componentUpdateEvent.getData().getComponentType().equals(ComponentType.TRANSFORM)) {
+				registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_TRANSFORM));
+			} else if (componentUpdateEvent.getData().getComponentType().isRender()) {
+				registry.getBus().dispatch(new RenderableUpdateEvent(componentUpdateEvent.getData(), RenderableUpdateEventType.UPDATE_RENDERABLE));
 			}
 		}
 
@@ -118,6 +119,10 @@ public class RegistryUpdater implements Subscribable {
 	@Override
 	public boolean supports(Class<? extends Event> aClass) {
 		return supported.contains(aClass);
+	}
+
+	public ArrayList<GcsSystem<Component>> getGcsSystems() {
+		return gcsSystems;
 	}
 
 }

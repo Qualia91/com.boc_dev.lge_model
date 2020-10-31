@@ -19,6 +19,28 @@ local components =
 				}
 			}
 		},
+		Controllable = {
+			comment = "Object that enables user control to a transform it is under.",
+      render = "false",
+			fields = {
+				enableMove = {
+					comment = "Can translate object",
+					type = "boolean",
+				},
+				enableLook = {
+					comment = "Can rotate object",
+					type = "boolean",
+				},
+				speed = {
+					comment = "translate speed",
+					type = "float",
+				},
+				sensitivity = {
+					comment = "rotation speed",
+					type = "float",
+				},
+			}
+		},
 		RigidBody = {
 			comment = "Component that gets affected by the rigid body system. It must be under a transform, and thats the one that gets transformed.",
       render = "false",
@@ -111,15 +133,15 @@ local components =
 				},
 				width = {
 					comment = "",
-					type = "double"
+					type = "int"
 				},
 				height = {
 					comment = "",
-					type = "double"
+					type = "int"
 				},
 				fov = {
 					comment = "",
-					type = "double"
+					type = "float"
 				},
 				cameraObjectType = {
 					comment = "",
@@ -131,28 +153,136 @@ local components =
 			comment = "",
       render = "true",
 			fields = {
-				geometryType = {
-					comment = "",
-					type = "GeometryType"
-				},
-				invertedNormals = {
-					comment = "",
-					type = "boolean"
-				},
-				texture = {
-					comment = "",
-					type = "String"
-				},
-				normalTexture = {
-					comment = "",
-					type = "String"
-				},
 				localTransformation = {
 					comment = "",
-					type = "double"
+					type = "Matrix4f"
+				},
+				modelFile = {
+					comment = "",
+					type = "String"
+				},
+				material = {
+					comment = "",
+					type = "UUID"
 				},
 			}
-		}
+		},
+		Material = {
+			comment = "",
+      render = "true",
+			fields = {
+				diffuseColour = {
+					comment = "",
+					type = "Vec3f"
+				},
+				specularColour = {
+					comment = "",
+					type = "Vec3f"
+				},
+				shininess = {
+					comment = "",
+					type = "float"
+				},
+				reflectance = {
+					comment = "",
+					type = "float"
+				},
+			}
+		},
+		Texture = {
+			comment = "",
+      render = "true",
+			fields = {
+				path = {
+					comment = "",
+					type = "String"
+				},
+			}
+		},
+		NormalMap = {
+			comment = "",
+      render = "true",
+			fields = {
+				path = {
+					comment = "",
+					type = "String"
+				},
+			}
+		},
+		Text = {
+			comment = "",
+      render = "true",
+			fields = {
+				text = {
+					comment = "",
+					type = "String"
+				},
+				fontFile = {
+					comment = "",
+					type = "String"
+				},
+				rowNum = {
+					comment = "",
+					type = "int"
+				},
+				colNum = {
+					comment = "",
+					type = "int"
+				},
+			}
+		},
+		WaterGeneration = {
+			comment = "",
+      render = "false",
+			fields = {
+				cellSize = {
+					comment = "",
+					type = "int"
+				},
+				size = {
+					comment = "",
+					type = "String"
+				},
+				waterHeight = {
+					comment = "",
+					type = "int"
+				},
+			}
+		},
+		TerrainGeneration = {
+			comment = "",
+      render = "false",
+			fields = {
+				octaves = {
+					comment = "",
+					type = "int"
+				},
+				lacunarity = {
+					comment = "",
+					type = "String"
+				},
+				generationRange = {
+					comment = "",
+					type = "int"
+				},
+				cellSpace = {
+					comment = "",
+					type = "int"
+				},
+				chunkSize = {
+					comment = "",
+					type = "int"
+				},
+				segmentSize = {
+					comment = "",
+					type = "int"
+				},
+				amplitude = {
+					comment = "",
+					type = "int"
+				},
+			}
+		},
 	}
 
 return components

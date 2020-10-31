@@ -1,18 +1,6 @@
 
 local enums = 
 	{
-		GeometryType = {
-			"SPHERE",
-			"CUBOID",
-			"SQUARE",
-			"TEXT",
-			"MODEL",
-			"TERRAIN",
-			"POINT",
-			"WATER",
-			"TRIANGLE",
-			"CIRCLE"
-		},
 		LightingType = {
 			"POINT",
 			"SPOT",
@@ -32,6 +20,10 @@ local enums =
 			"SPHERE",
 			"SPHERE_INNER",
 			"NONE"
+		},
+		TextureType = {
+			"VISUAL",
+      "NORMAL"
 		}
 	}
 

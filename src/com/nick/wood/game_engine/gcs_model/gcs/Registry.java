@@ -1,28 +1,28 @@
 package com.nick.wood.game_engine.gcs_model.gcs;
 
-import com.nick.wood.game_engine.event_bus.events.RenderEvent;
 import com.nick.wood.game_engine.gcs_model.bus.ComponentCreateEvent;
 import com.nick.wood.game_engine.event_bus.busses.GameBus;
 import com.nick.wood.game_engine.gcs_model.bus.RenderableUpdateEvent;
 import com.nick.wood.game_engine.gcs_model.bus.RenderableUpdateEventType;
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
+import com.nick.wood.game_engine.gcs_model.systems.GcsSystem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 public class Registry {
 
-	private final HashMap<ComponentType, ArrayList<Component>> componentMap = new HashMap<>();
+	private final HashMap<ComponentType, HashSet<Component>> componentMap = new HashMap<>();
 	private final GameBus gameBus;
 
 	public Registry(GameBus gameBus) {
 		for (ComponentType value : ComponentType.values()) {
-			componentMap.put(value, new ArrayList<>());
+			componentMap.put(value, new HashSet<>());
 		}
 		this.gameBus = gameBus;
 	}
 
-	public HashMap<ComponentType, ArrayList<Component>> getComponentMap() {
+	public HashMap<ComponentType, HashSet<Component>> getComponentMap() {
 		return componentMap;
 	}
 
@@ -57,12 +57,23 @@ public class Registry {
 			gameBus.dispatch(new RenderableUpdateEvent(component, RenderableUpdateEventType.CREATE));
 		}
 
+		// now create components underneath unless they are already created
+		for (Component child : component.getChildren()) {
+			if (!componentMap.get(child.getComponentType()).contains(child)) {
+				createComponent(child);
+			}
+		}
+
 		// add component
 		componentMap.get(component.getComponentType()).add(component);
 	}
 
-	public void registerComponent(Component component) {
+	void registerComponent(Component component) {
 		// add component
 		gameBus.dispatch(new ComponentCreateEvent(component));
+
+	}
+
+	public void addSystem(GcsSystem inputSystem) {
 	}
 }
