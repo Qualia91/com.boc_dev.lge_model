@@ -283,6 +283,16 @@ local components =
 				},
 			}
 		},
+		Boid = {
+			comment = "",
+      render = "false",
+			fields = {
+				goal = {
+					comment = "",
+					type = "Vec3f"
+				},
+			}
+		},
 	}
 
 return components
