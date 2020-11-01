@@ -291,6 +291,46 @@ local components =
 					comment = "",
 					type = "Vec3f"
 				},
+				velocity = {
+					comment = "",
+					type = "Vec3f"
+				},
+				speed = {
+					comment = "",
+					type = "float"
+				},
+				radius = {
+					comment = "",
+					type = "float"
+				},
+				minSpeed = {
+					comment = "",
+					type = "float"
+				},
+				lengthAwayGroupSquared= {
+					comment = "",
+					type = "float"
+				},
+				lengthAwayMinSquared= {
+					comment = "",
+					type = "float"
+				},
+				boundScale= {
+					comment = "",
+					type = "float"
+				},
+				velocityMatchScale= {
+					comment = "",
+					type = "float"
+				},
+				antiCollideScale= {
+					comment = "",
+					type = "float"
+				},
+				perceivedCenterScale= {
+					comment = "",
+					type = "float"
+				},
 			}
 		},
 	}
