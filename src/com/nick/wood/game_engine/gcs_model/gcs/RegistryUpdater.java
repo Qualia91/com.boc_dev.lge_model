@@ -21,9 +21,9 @@ public class RegistryUpdater implements Subscribable {
 	private final GameBus gameBus;
 	private final ArrayList<GcsSystem<Component>> gcsSystems;
 
-	private final ArrayBlockingQueue<ComponentUpdateEvent> changeEventsQueue = new ArrayBlockingQueue<>(100000);
-	private final ArrayBlockingQueue<ComponentCreateEvent> createEventsQueue = new ArrayBlockingQueue<>(100000);
-	private final ArrayBlockingQueue<ComponentDestroyEvent> destroyEventsQueue = new ArrayBlockingQueue<>(100000);
+	private final ArrayBlockingQueue<ComponentUpdateEvent> changeEventsQueue = new ArrayBlockingQueue<>(1_000_000);
+	private final ArrayBlockingQueue<ComponentCreateEvent> createEventsQueue = new ArrayBlockingQueue<>(1_000_000);
+	private final ArrayBlockingQueue<ComponentDestroyEvent> destroyEventsQueue = new ArrayBlockingQueue<>(1_000_000);
 	private final ArrayList<ComponentUpdateEvent> drainToListChange = new ArrayList<>();
 	private final ArrayList<ComponentCreateEvent> drainToListCreate = new ArrayList<>();
 	private final ArrayList<ComponentDestroyEvent> drainToListDestroy = new ArrayList<>();
