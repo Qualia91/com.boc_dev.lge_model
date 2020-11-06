@@ -10,6 +10,7 @@ import_locations = {
   Vec3f = "com.nick.wood.maths.objects.vector.Vec3f",
   Vec3d = "com.nick.wood.maths.objects.vector.Vec3d",
   Matrix4f = "com.nick.wood.maths.objects.matrix.Matrix4f",
+  Vec2i = "com.nick.wood.maths.objects.vector.Vec2i",
   UUID = "java.util.UUID"
 }
 

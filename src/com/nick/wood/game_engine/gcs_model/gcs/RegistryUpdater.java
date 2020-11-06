@@ -12,6 +12,8 @@ import com.nick.wood.game_engine.event_bus.interfaces.Subscribable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class RegistryUpdater implements Subscribable {
 
@@ -38,6 +40,7 @@ public class RegistryUpdater implements Subscribable {
 		this.gameBus = gameBus;
 		gameBus.register(this);
 		this.gcsSystems = gcsSystems;
+
 
 	}
 

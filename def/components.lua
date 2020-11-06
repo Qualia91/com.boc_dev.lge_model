@@ -263,7 +263,7 @@ local components =
 				},
 				lacunarity = {
 					comment = "",
-					type = "String"
+					type = "float"
 				},
 				generationRange = {
 					comment = "",
@@ -284,6 +284,32 @@ local components =
 				amplitude = {
 					comment = "",
 					type = "int"
+				},
+        materialID = {
+          comment = "",
+          type = "UUID"
+        },
+			}
+		},
+		TerrainChunk = {
+			comment = "",
+      render = "true",
+			fields = {
+				index = {
+					comment = "",
+					type = "Vec2i"
+				},
+				grid = {
+					comment = "",
+					type = "float[][]"
+				},
+        cellSpace = {
+					comment = "",
+					type = "double"
+				},
+        origin = {
+					comment = "",
+					type = "Vec3f"
 				},
 			}
 		},
