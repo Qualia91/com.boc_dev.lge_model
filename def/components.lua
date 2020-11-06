@@ -110,12 +110,16 @@ local components =
       render = "true",
 			fields = {
 				skyboxType = {
-					comment = "Type of geometry used to make sykbox. Can be CUBE, SPHERE, or MODEL",
+					comment = "Type of geometry used to make sykbox. Can be CUBE or SPHERE",
 					type = "SkyboxType"
 				},
 				texture = {
 					comment = "Texture of the skybox",
 					type = "String"
+				},
+				distance = {
+					comment = "Distance the skybox is rendered at",
+					type = "float"
 				}
 			}
 		},

@@ -8,8 +8,7 @@ local enums =
 		},
 		SkyboxType = {
 			"SPHERE",
-			"CUBE",
-			"MODEL"
+			"CUBE"
 		},
 		CameraObjectType = {
 			"PRIMARY",
