@@ -1,8 +1,28 @@
+function pairsByKeys (t, f)
+      local a = {}
+      for n in pairs(t) do table.insert(a, n) end
+      table.sort(a, f)
+      local i = 0      -- iterator variable
+      local iter = function ()   -- iterator function
+        i = i + 1
+        if a[i] == nil then return nil
+        else return a[i], t[a[i]]
+        end
+      end
+      return iter
+    end
 
+local generated_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\"
 local folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\components\\"
+local object_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\objects\\"
 local enums_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\enums\\"
 local package = "com.nick.wood.game_engine.gcs_model.generated.components"
 local enums_package = "com.nick.wood.game_engine.gcs_model.generated.enums"
+
+-- make directories
+os.execute("mkdir ..\\" .. object_folder)
+os.execute("mkdir ..\\" .. folder)
+os.execute("mkdir ..\\" .. enums_folder)
 
 import_locations = { 
   QuaternionF = "com.nick.wood.maths.objects.QuaternionF",
@@ -47,7 +67,7 @@ function generate_construction_params(fields)
   
   local return_string = ""
   
-  for k, v in pairs(fields) do
+  for k, v in pairsByKeys(fields) do
       
       return_string = return_string .. v.type .. " " .. k .. ", "
       
