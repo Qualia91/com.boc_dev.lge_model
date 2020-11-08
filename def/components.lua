@@ -151,6 +151,10 @@ local components =
 					comment = "",
 					type = "CameraObjectType"
 				},
+				CameraProjectionType = {
+					comment = "",
+					type = "CameraProjectionType"
+				},
 			}
 		},
 		Geometry = {

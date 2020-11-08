@@ -14,6 +14,10 @@ local enums =
 			"PRIMARY",
 			"FBO"
 		},
+		CameraProjectionType = {
+			"PERSPECTIVE",
+			"ORTHOGRAPHIC"
+		},
 		RigidBodyObjectType = {
 			"CUBOID",
 			"SPHERE",
