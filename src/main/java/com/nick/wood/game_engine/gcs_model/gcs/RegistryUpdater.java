@@ -1,8 +1,6 @@
 package com.nick.wood.game_engine.gcs_model.gcs;
 
 import com.nick.wood.game_engine.gcs_model.bus.*;
-import com.nick.wood.game_engine.gcs_model.gcs.Component;
-import com.nick.wood.game_engine.gcs_model.gcs.Registry;
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 import com.nick.wood.game_engine.gcs_model.systems.GcsSystem;
 import com.nick.wood.game_engine.event_bus.busses.GameBus;
@@ -12,8 +10,6 @@ import com.nick.wood.game_engine.event_bus.interfaces.Subscribable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class RegistryUpdater implements Subscribable {
 

@@ -12,10 +12,10 @@ function pairsByKeys (t, f)
       return iter
     end
 
-local generated_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\"
-local folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\components\\"
-local object_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\objects\\"
-local enums_folder = "src\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\enums\\"
+local generated_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\generated\\"
+local folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\components\\"
+local object_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\objects\\"
+local enums_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\enums\\"
 local package = "com.nick.wood.game_engine.gcs_model.generated.components"
 local enums_package = "com.nick.wood.game_engine.gcs_model.generated.enums"
 
@@ -152,7 +152,6 @@ function generate_imports(fields, import_locations, render)
   end
   
   return_string = "import com.nick.wood.game_engine.gcs_model.gcs.*;\n"
-  return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.objects.*;\n"
   return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.enums.*;\n"
   
   if render == "true" then

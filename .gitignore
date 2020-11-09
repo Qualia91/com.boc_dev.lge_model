@@ -23,3 +23,5 @@
 hs_err_pid*
 .idea/
 src/com/nick/wood/game_engine/gcs_model/generated/*
+/src/main/java/com/nick/wood/game_engine/gcs_model/generated/
+/target/maven-status/maven-compiler-plugin/compile/default-compile/

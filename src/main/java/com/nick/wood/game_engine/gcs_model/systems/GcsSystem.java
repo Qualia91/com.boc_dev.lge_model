@@ -4,7 +4,6 @@ import com.nick.wood.game_engine.gcs_model.gcs.Component;
 import com.nick.wood.game_engine.gcs_model.gcs.Registry;
 import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public interface GcsSystem<T extends Component> {
