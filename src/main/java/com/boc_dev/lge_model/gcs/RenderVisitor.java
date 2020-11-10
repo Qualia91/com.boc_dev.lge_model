@@ -1,7 +1,7 @@
-package com.nick.wood.game_engine.gcs_model.gcs;
+package com.boc_dev.lge_model.gcs;
 
-import com.nick.wood.game_engine.gcs_model.generated.components.*;
-import com.nick.wood.maths.objects.matrix.Matrix4f;
+import com.boc_dev.lge_model.generated.components.*;
+import com.boc_dev.maths.objects.matrix.Matrix4f;
 
 public interface RenderVisitor {
 

@@ -1,8 +1,8 @@
-package com.nick.wood.game_engine.gcs_model.bus;
+package com.boc_dev.lge_model.bus;
 
-import com.nick.wood.game_engine.gcs_model.gcs.ChangeSet;
-import com.nick.wood.game_engine.gcs_model.gcs.Component;
-import com.nick.wood.game_engine.event_bus.interfaces.Event;
+import com.boc_dev.lge_model.gcs.ChangeSet;
+import com.boc_dev.lge_model.gcs.Component;
+import com.boc_dev.event_bus.interfaces.Event;
 
 public class ComponentUpdateEvent implements Event<Component> {
 

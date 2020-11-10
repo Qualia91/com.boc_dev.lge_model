@@ -12,12 +12,12 @@ function pairsByKeys (t, f)
       return iter
     end
 
-local generated_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\generated\\"
-local folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\components\\"
-local object_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\objects\\"
-local enums_folder = "src\\main\\java\\com\\nick\\wood\\game_engine\\gcs_model\\generated\\enums\\"
-local package = "com.nick.wood.game_engine.gcs_model.generated.components"
-local enums_package = "com.nick.wood.game_engine.gcs_model.generated.enums"
+local generated_folder = "src\\main\\java\\com\\boc_dev\\lge_model\\generated\\generated\\"
+local folder = "src\\main\\java\\com\\boc_dev\\lge_model\\generated\\components\\"
+local object_folder = "src\\main\\java\\com\\boc_dev\\lge_model\\generated\\objects\\"
+local enums_folder = "src\\main\\java\\com\\boc_dev\\lge_model\\generated\\enums\\"
+local package = "com.boc_dev.lge_model.generated.components"
+local enums_package = "com.boc_dev.lge_model.generated.enums"
 
 -- make directories
 os.execute("mkdir ..\\" .. object_folder)
@@ -25,12 +25,12 @@ os.execute("mkdir ..\\" .. folder)
 os.execute("mkdir ..\\" .. enums_folder)
 
 import_locations = { 
-  QuaternionF = "com.nick.wood.maths.objects.QuaternionF",
-  QuaternionD = "com.nick.wood.maths.objects.QuaternionD",
-  Vec3f = "com.nick.wood.maths.objects.vector.Vec3f",
-  Vec3d = "com.nick.wood.maths.objects.vector.Vec3d",
-  Matrix4f = "com.nick.wood.maths.objects.matrix.Matrix4f",
-  Vec2i = "com.nick.wood.maths.objects.vector.Vec2i",
+  QuaternionF = "com.boc_dev.maths.objects.QuaternionF",
+  QuaternionD = "com.boc_dev.maths.objects.QuaternionD",
+  Vec3f = "com.boc_dev.maths.objects.vector.Vec3f",
+  Vec3d = "com.boc_dev.maths.objects.vector.Vec3d",
+  Matrix4f = "com.boc_dev.maths.objects.matrix.Matrix4f",
+  Vec2i = "com.boc_dev.maths.objects.vector.Vec2i",
   UUID = "java.util.UUID"
 }
 
@@ -151,14 +151,14 @@ function generate_imports(fields, import_locations, render)
       
   end
   
-  return_string = "import com.nick.wood.game_engine.gcs_model.gcs.*;\n"
-  return_string = return_string .. "import com.nick.wood.game_engine.gcs_model.generated.enums.*;\n"
+  return_string = "import com.boc_dev.lge_model.gcs.*;\n"
+  return_string = return_string .. "import com.boc_dev.lge_model.generated.enums.*;\n"
   
   if render == "true" then
     
-    if not string.find(return_string, "com.nick.wood.maths.objects.matrix.Matrix4f") then
+    if not string.find(return_string, "com.boc_dev.maths.objects.matrix.Matrix4f") then
   
-      return_string = return_string .. "import com.nick.wood.maths.objects.matrix.Matrix4f;\n"
+      return_string = return_string .. "import com.boc_dev.maths.objects.matrix.Matrix4f;\n"
     
     end
     

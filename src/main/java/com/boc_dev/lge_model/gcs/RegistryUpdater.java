@@ -1,11 +1,11 @@
-package com.nick.wood.game_engine.gcs_model.gcs;
+package com.boc_dev.lge_model.gcs;
 
-import com.nick.wood.game_engine.gcs_model.bus.*;
-import com.nick.wood.game_engine.gcs_model.generated.components.ComponentType;
-import com.nick.wood.game_engine.gcs_model.systems.GcsSystem;
-import com.nick.wood.game_engine.event_bus.busses.GameBus;
-import com.nick.wood.game_engine.event_bus.interfaces.Event;
-import com.nick.wood.game_engine.event_bus.interfaces.Subscribable;
+import com.boc_dev.lge_model.bus.*;
+import com.boc_dev.lge_model.generated.components.ComponentType;
+import com.boc_dev.lge_model.systems.GcsSystem;
+import com.boc_dev.event_bus.busses.GameBus;
+import com.boc_dev.event_bus.interfaces.Event;
+import com.boc_dev.event_bus.interfaces.Subscribable;
 
 import java.util.ArrayList;
 import java.util.HashSet;

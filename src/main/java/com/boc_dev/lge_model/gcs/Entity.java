@@ -1,4 +1,4 @@
-package com.nick.wood.game_engine.gcs_model.gcs;
+package com.boc_dev.lge_model.gcs;
 
 public class Entity {
 

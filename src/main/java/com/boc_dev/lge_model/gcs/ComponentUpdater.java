@@ -1,7 +1,7 @@
-package com.nick.wood.game_engine.gcs_model.gcs;
+package com.boc_dev.lge_model.gcs;
 
-import com.nick.wood.game_engine.gcs_model.bus.ComponentDestroyEvent;
-import com.nick.wood.game_engine.gcs_model.bus.ComponentUpdateEvent;
+import com.boc_dev.lge_model.bus.ComponentDestroyEvent;
+import com.boc_dev.lge_model.bus.ComponentUpdateEvent;
 
 import java.util.function.Consumer;
 

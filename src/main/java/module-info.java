@@ -1,10 +1,10 @@
-module com.nick.wood.game_engine.gcs_model {
-	requires com.nick.wood.maths;
-	requires com.nick.wood.game_engine.event_bus;
+module com.boc_dev.lge_model {
+	requires com.boc_dev.maths;
+	requires com.boc_dev.event_bus;
 
-	exports com.nick.wood.game_engine.gcs_model.generated.components;
-	exports com.nick.wood.game_engine.gcs_model.generated.enums;
-	exports com.nick.wood.game_engine.gcs_model.gcs;
-	exports com.nick.wood.game_engine.gcs_model.systems;
-	exports com.nick.wood.game_engine.gcs_model.bus;
+	exports com.boc_dev.lge_model.generated.components;
+	exports com.boc_dev.lge_model.generated.enums;
+	exports com.boc_dev.lge_model.gcs;
+	exports com.boc_dev.lge_model.systems;
+	exports com.boc_dev.lge_model.bus;
 }
