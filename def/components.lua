@@ -315,6 +315,10 @@ local components =
 					comment = "",
 					type = "Vec3f"
 				},
+        materialID = {
+          comment = "",
+          type = "UUID"
+        },
 			}
 		},
 		Boid = {
