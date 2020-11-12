@@ -14,6 +14,7 @@ public interface RenderVisitor {
 	void sendCreateUpdate(TextureObject textureObject);
 	void sendCreateUpdate(NormalMapObject normalMapObject);
 	void sendCreateUpdate(TerrainChunkObject terrainChunkObject);
+	void sendCreateUpdate(WaterChunkObject waterChunkObject);
 
 	void sendInstanceUpdate(GeometryObject geometryObject, Matrix4f newTransform);
 	void sendInstanceUpdate(MaterialObject materialObject, Matrix4f newTransform);
@@ -22,8 +23,9 @@ public interface RenderVisitor {
 	void sendInstanceUpdate(SkyBoxObject skyBoxObject, Matrix4f newTransform);
 	void sendInstanceUpdate(TextObject textObject, Matrix4f newTransform);
 	void sendInstanceUpdate(TextureObject textureObject, Matrix4f newTransform);
-	void sendInstanceUpdate(NormalMapObject normalMapObject, Matrix4f translation);
-	void sendInstanceUpdate(TerrainChunkObject terrainChunkObject, Matrix4f translation);
+	void sendInstanceUpdate(NormalMapObject normalMapObject, Matrix4f newTransform);
+	void sendInstanceUpdate(TerrainChunkObject terrainChunkObject, Matrix4f newTransform);
+	void sendInstanceUpdate(WaterChunkObject waterChunkObject, Matrix4f newTransform);
 
 	void sendDeleteUpdate(GeometryObject geometryObject);
 	void sendDeleteUpdate(MaterialObject materialObject);
@@ -34,4 +36,5 @@ public interface RenderVisitor {
 	void sendDeleteUpdate(TextureObject textureObject);
 	void sendDeleteUpdate(NormalMapObject normalMapObject);
 	void sendDeleteUpdate(TerrainChunkObject terrainChunkObject);
+	void sendDeleteUpdate(WaterChunkObject waterChunkObject);
 }

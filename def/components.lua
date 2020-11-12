@@ -243,15 +243,29 @@ local components =
 			comment = "",
       render = "false",
 			fields = {
-				cellSize = {
+				cellSpace = {
 					comment = "",
 					type = "int"
 				},
-				size = {
+				chunkSize = {
 					comment = "",
-					type = "String"
+					type = "int"
 				},
-				waterHeight = {
+				height = {
+					comment = "",
+					type = "int"
+				},
+			}
+		},
+		WaterChunk = {
+			comment = "",
+      render = "true",
+			fields = {
+        grid = {
+					comment = "",
+					type = "float[][]"
+				},
+				cellSpace = {
 					comment = "",
 					type = "int"
 				},
