@@ -78,7 +78,4 @@ public class Registry {
 		gameBus.dispatch(new ComponentCreateEvent(component));
 
 	}
-
-	public void addSystem(GcsSystem inputSystem) {
-	}
 }
