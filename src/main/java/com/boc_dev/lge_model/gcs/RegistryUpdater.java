@@ -37,7 +37,6 @@ public class RegistryUpdater implements Subscribable {
 		gameBus.register(this);
 		this.gcsSystems = gcsSystems;
 
-
 	}
 
 	public Registry getRegistry() {

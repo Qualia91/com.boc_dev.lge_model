@@ -14,12 +14,18 @@ public class Registry {
 
 	private final HashMap<ComponentType, HashSet<Component>> componentMap = new HashMap<>();
 	private final GameBus gameBus;
+	private final String layerName;
 
-	public Registry(GameBus gameBus) {
+	public Registry(GameBus gameBus, String layerName) {
+		this.layerName = layerName;
 		for (ComponentType value : ComponentType.values()) {
 			componentMap.put(value, new HashSet<>());
 		}
 		this.gameBus = gameBus;
+	}
+
+	public String getLayerName() {
+		return layerName;
 	}
 
 	public HashMap<ComponentType, HashSet<Component>> getComponentMap() {
@@ -39,9 +45,8 @@ public class Registry {
 		// remove component from map
 		componentMap.get(component.getComponentType()).remove(component);
 		// recursively delete children components
-		int children = component.getChildren().size();
-		for (int i = 0; i < children; i++) {
-			deleteComponent(component.getChildren().get(i));
+		while (!component.getChildren().isEmpty()) {
+			deleteComponent(component.getChildren().get(0));
 		}
 	}
 

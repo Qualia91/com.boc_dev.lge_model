@@ -371,6 +371,16 @@ local components =
 				},
 			}
 		},
+		Pickable = {
+			comment = "",
+      render = "false",
+			fields = {
+				active = {
+					comment = "",
+					type = "boolean"
+				},
+			}
+		},
 	}
 
 return components
