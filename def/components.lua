@@ -387,7 +387,7 @@ local components =
 		},
 		Pickable = {
 			comment = "",
-      render = "false",
+      render = "true",
 			fields = {
 				active = {
 					comment = "",
