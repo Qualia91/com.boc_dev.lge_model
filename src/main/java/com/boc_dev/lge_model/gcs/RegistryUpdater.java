@@ -75,6 +75,13 @@ public class RegistryUpdater implements Subscribable {
 
 		// update world state
 		for (ComponentDestroyEvent componentDestroyEvent : drainToListDestroy) {
+
+			// break the chain here (remove parent and child either side of break), and dont break chains in
+			// the iteration so when they have been deleted i can get the parents (ie for picking)
+
+			// remove parent (which removes child)
+			componentDestroyEvent.getData().removeParent();
+
 			registry.deleteComponent(componentDestroyEvent.getData());
 		}
 

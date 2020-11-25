@@ -40,13 +40,11 @@ public class Registry {
 			gameBus.dispatch(new RenderableUpdateEvent(component, RenderableUpdateEventType.DESTROY));
 		}
 
-		// remove parent (which removes child)
-		component.removeParent();
 		// remove component from map
 		componentMap.get(component.getComponentType()).remove(component);
 		// recursively delete children components
-		while (!component.getChildren().isEmpty()) {
-			deleteComponent(component.getChildren().get(0));
+		for (Component child : component.getChildren()) {
+			deleteComponent(child);
 		}
 	}
 
