@@ -67,6 +67,20 @@ local components =
 				},
 			}
 		},
+    Impulse = {
+			comment = "Impulse given from player.",
+      render = "false",
+			fields = {
+				linearVelocityImpulse = {
+					comment = "linear velocity impulse of entity",
+					type = "Vec3d",
+				},
+				angularVelocityImpulse = {
+					comment = "angular velocity impulse of entity",
+					type = "Vec3d",
+				},
+			}
+		},
 		Light = {
 			comment = "Component that gets affected by the rigid body system. It must be under a transform, and thats the one that gets transformed.",
       render = "true",
