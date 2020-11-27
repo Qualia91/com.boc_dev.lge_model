@@ -395,6 +395,34 @@ local components =
 				},
 			}
 		},
+		Selectable = {
+			comment = "",
+      render = "false",
+			fields = {
+				selected = {
+					comment = "",
+					type = "boolean"
+				},
+				unselectedMaterialUUID = {
+					comment = "",
+					type = "UUID"
+				},
+				selectedMaterialUUID = {
+					comment = "",
+					type = "UUID"
+				},
+			}
+		},
+		SelectedItems = {
+			comment = "",
+      render = "false",
+			fields = {
+				pickingHappened = {
+					comment = "Flig to tell selection system that a picking event occured and selection needs to clear and update",
+					type = "boolean"
+				},
+			}
+		},
 	}
 
 return components
