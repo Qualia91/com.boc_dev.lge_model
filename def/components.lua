@@ -41,6 +41,28 @@ local components =
 				},
 			}
 		},
+		ImpulseControllable = {
+			comment = "Object that enables user control to a transform it is under via linear and angular momentum impulses.",
+      render = "false",
+			fields = {
+				enableMove = {
+					comment = "Can translate object",
+					type = "boolean",
+				},
+				enableRotate = {
+					comment = "Can rotate object",
+					type = "boolean",
+				},
+				linearSpeed = {
+					comment = "translate speed",
+					type = "float",
+				},
+				angularSpeed = {
+					comment = "rotation speed",
+					type = "float",
+				},
+			}
+		},
 		RigidBody = {
 			comment = "Component that gets affected by the rigid body system. It must be under a transform, and thats the one that gets transformed.",
       render = "false",
