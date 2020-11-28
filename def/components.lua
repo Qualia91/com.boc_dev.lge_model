@@ -89,6 +89,20 @@ local components =
 				},
 			}
 		},
+		Gravity = {
+			comment = "",
+      render = "false",
+			fields = {
+				simple = {
+					comment = "",
+					type = "boolean"
+				},
+				G = {
+					comment = "",
+					type = "float"
+				},
+			}
+		},
     Impulse = {
 			comment = "Impulse given from player.",
       render = "false",
@@ -473,16 +487,6 @@ local components =
 				},
 			}
 		},
-		ParticleSimpleGravity = {
-			comment = "",
-      render = "false",
-			fields = {
-				G = {
-					comment = "",
-					type = "float"
-				},
-			}
-		},
 		ParticleSpring = {
 			comment = "",
       render = "false",
@@ -501,7 +505,7 @@ local components =
 				},
 			}
 		},
-		ParticleViscousDrag = {
+		ViscousDrag = {
 			comment = "",
       render = "false",
 			fields = {
