@@ -238,7 +238,7 @@ function generate_component_class(component_name, component, lines, folder)
   io.write(new_file_text)
 
   -- closes the open file
-  file.close()
+  file:close()
   
 end
 
@@ -287,7 +287,7 @@ io.output(file)
 io.write(enum_file_string)
 
 -- closes the open file
-file.close()
+file:close()
 
 
 -- generate enums
@@ -303,5 +303,5 @@ for k, v in pairs(enums) do
   io.write(enum_file_string)
 
   -- closes the open file
-  file.close()
+  file:close()
 end

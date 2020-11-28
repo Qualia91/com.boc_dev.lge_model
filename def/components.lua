@@ -454,8 +454,60 @@ local components =
       render = "false",
 			fields = {
 				pickingHappened = {
-					comment = "Flig to tell selection system that a picking event occured and selection needs to clear and update",
+					comment = "Flag to tell selection system that a picking event occured and selection needs to clear and update",
 					type = "boolean"
+				},
+			}
+		},
+		ParticleBody = {
+			comment = "",
+      render = "false",
+			fields = {
+				mass = {
+					comment = "",
+					type = "float"
+				},
+				velocity = {
+					comment = "",
+					type = "Vec3d"
+				},
+			}
+		},
+		ParticleSimpleGravity = {
+			comment = "",
+      render = "false",
+			fields = {
+				G = {
+					comment = "",
+					type = "float"
+				},
+			}
+		},
+		ParticleSpring = {
+			comment = "",
+      render = "false",
+			fields = {
+				restLength = {
+					comment = "",
+					type = "float"
+				},
+				springConstant = {
+					comment = "",
+					type = "float"
+				},
+				dampingConstant = {
+					comment = "",
+					type = "float"
+				},
+			}
+		},
+		ParticleViscousDrag = {
+			comment = "",
+      render = "false",
+			fields = {
+				coefficientOfDrag = {
+					comment = "",
+					type = "float"
 				},
 			}
 		},
