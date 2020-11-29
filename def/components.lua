@@ -515,6 +515,36 @@ local components =
 				},
 			}
 		},
+		Timer = {
+			comment = "",
+      render = "false",
+			fields = {
+				active = {
+					comment = "",
+					type = "boolean"
+				},
+				startFrame = {
+					comment = "",
+					type = "long"
+				},
+				timeoutLength = {
+					comment = "",
+					type = "long"
+				},
+				timeoutFlag = {
+					comment = "",
+					type = "boolean"
+				},
+				repeate = {
+					comment = "",
+					type = "boolean"
+				},
+				functionName = {
+					comment = "this will be the name of what function is ativated when this timer runs out",
+					type = "String"
+				},
+			}
+		},
 	}
 
 return components
