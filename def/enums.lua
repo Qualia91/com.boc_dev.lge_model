@@ -27,7 +27,11 @@ local enums =
 		TextureType = {
 			"VISUAL",
       "NORMAL"
-		}
+		},
+		CollisionShape = {
+			"SPEHER",
+      "CUBOID"
+		},
 	}
 
 return enums

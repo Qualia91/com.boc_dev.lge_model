@@ -515,6 +515,26 @@ local components =
 				},
 			}
 		},
+		Collision = {
+			comment = "",
+      render = "false",
+			fields = {
+				collisionRestitution = {
+					comment = "",
+					type = "float"
+				},
+			}
+		},
+		Mesh = {
+			comment = "",
+      render = "true",
+			fields = {
+				vertexPositions = {
+					comment = "",
+					type = "Vec3f[]"
+				},
+			}
+		},
 		Timer = {
 			comment = "",
       render = "false",

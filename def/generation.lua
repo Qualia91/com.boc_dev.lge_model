@@ -146,8 +146,15 @@ function generate_imports(fields, import_locations, render)
   import_needed = {}
   
   for k, v in pairs(fields) do
-      
-      import_needed[v.type] = true
+    
+    local typeStr = ""
+    if string.match(v.type, "%[%]") then
+      typeStr = v.type:gsub("%[%]", "")
+    else
+      typeStr = v.type
+    end
+    
+    import_needed[typeStr] = true
       
   end
   
