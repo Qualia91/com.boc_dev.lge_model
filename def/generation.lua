@@ -31,6 +31,7 @@ import_locations = {
   Vec3d = "com.boc_dev.maths.objects.vector.Vec3d",
   Matrix4f = "com.boc_dev.maths.objects.matrix.Matrix4f",
   Vec2i = "com.boc_dev.maths.objects.vector.Vec2i",
+  Vec3i = "com.boc_dev.maths.objects.vector.Vec3i",
   UUID = "java.util.UUID"
 }
 

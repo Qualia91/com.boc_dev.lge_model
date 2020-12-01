@@ -533,6 +533,32 @@ local components =
 					comment = "",
 					type = "Vec3f[]"
 				},
+				index = {
+					comment = "",
+					type = "Vec3i"
+				},
+				materialID = {
+					comment = "",
+					type = "UUID"
+				},
+			}
+		},
+		MarchingCubeGeneration = {
+			comment = "",
+      render = "false",
+			fields = {
+				generationRange = {
+					comment = "",
+					type = "int"
+				},
+				chunkSize = {
+					comment = "",
+					type = "int"
+				},
+				materialID = {
+					comment = "",
+					type = "UUID"
+				},
 			}
 		},
 		Timer = {
