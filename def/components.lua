@@ -591,6 +591,20 @@ local components =
 				},
 			}
 		},
+		Button = {
+			comment = "",
+      render = "false",
+			fields = {
+				active = {
+					comment = "",
+					type = "boolean"
+				},
+				functionName = {
+					comment = "this will be the name of what function is activated when this button is pressed",
+					type = "String"
+				},
+			}
+		},
 	}
 
 return components
