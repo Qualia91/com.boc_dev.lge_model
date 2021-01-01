@@ -275,17 +275,9 @@ local components =
 					comment = "",
 					type = "String"
 				},
-				fontFile = {
+				fontName = {
 					comment = "",
 					type = "String"
-				},
-				rowNum = {
-					comment = "",
-					type = "int"
-				},
-				colNum = {
-					comment = "",
-					type = "int"
 				},
 			}
 		},
