@@ -279,6 +279,14 @@ local components =
 					comment = "",
 					type = "String"
 				},
+				fontSize = {
+					comment = "",
+					type = "float"
+				},
+        fontAlignment = {
+					comment = "",
+					type = "FontAlignment"
+				},
 			}
 		},
 		WaterGeneration = {
@@ -594,6 +602,16 @@ local components =
 				functionName = {
 					comment = "this will be the name of what function is activated when this button is pressed",
 					type = "String"
+				},
+			}
+		},
+		List = {
+			comment = "",
+      render = "false",
+			fields = {
+				cellHeight = {
+					comment = "height each object underneath should be positioned away from each other",
+					type = "float"
 				},
 			}
 		},

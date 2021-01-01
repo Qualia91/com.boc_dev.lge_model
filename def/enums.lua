@@ -32,6 +32,11 @@ local enums =
 			"SPEHER",
       "CUBOID"
 		},
+		FontAlignment = {
+			"BEGIN",
+      "END",
+      "CENTER"
+		},
 	}
 
 return enums
