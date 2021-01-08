@@ -609,9 +609,31 @@ local components =
 			comment = "",
       render = "false",
 			fields = {
-				cellHeight = {
-					comment = "height each object underneath should be positioned away from each other",
+				spacerZ = {
+					comment = "space each object is from the next one in the z axis",
 					type = "float"
+				},
+        spacerY = {
+					comment = "space each object is from the next one in the y axis",
+					type = "float"
+				},
+				indentZ = {
+					comment = "indent of a sub list in the z axis",
+					type = "float"
+				},
+        indentY = {
+					comment = "indent of a sub list in the y axis",
+					type = "float"
+				},
+			}
+		},
+    Script = {
+			comment = "",
+      render = "false",
+			fields = {
+				scriptCode = {
+					comment = "Lua Script read in as a string",
+					type = "String"
 				},
 			}
 		},

@@ -37,6 +37,10 @@ local enums =
       "END",
       "CENTER"
 		},
+		Orientation = {
+			"HORIZONTAL",
+      "VERTICLE"
+		},
 	}
 
 return enums
