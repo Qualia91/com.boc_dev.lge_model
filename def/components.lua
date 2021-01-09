@@ -631,8 +631,8 @@ local components =
 			comment = "",
       render = "false",
 			fields = {
-				scriptCode = {
-					comment = "Lua Script read in as a string",
+				script = {
+					comment = "Lua Script file. This is searched for within ",
 					type = "String"
 				},
 			}
