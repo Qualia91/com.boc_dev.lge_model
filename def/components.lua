@@ -46,19 +46,19 @@ local components =
       render = "false",
 			fields = {
 				enableMove = {
-					comment = "Can translate object",
+					comment = "Can translate object.",
 					type = "boolean",
 				},
 				enableRotate = {
-					comment = "Can rotate object",
+					comment = "Can rotate object.",
 					type = "boolean",
 				},
 				linearSpeed = {
-					comment = "translate speed",
+					comment = "Translate speed.",
 					type = "float",
 				},
 				angularSpeed = {
-					comment = "rotation speed",
+					comment = "Rotation speed.",
 					type = "float",
 				},
 			}
@@ -68,15 +68,15 @@ local components =
       render = "false",
 			fields = {
 				mass = {
-					comment = "Mass in kg's of entity",
+					comment = "Mass in kg's of entity.",
 					type = "double",
 				},
 				dimensions = {
-					comment = "dimensions of entity",
+					comment = "Dimensions of entity.",
 					type = "Vec3d",
 				},
 				linearMomentum = {
-					comment = "linearMomentum of entity",
+					comment = "linearMomentum of entity.",
 					type = "Vec3d",
 				},
 				angularMomentum = {
@@ -84,21 +84,21 @@ local components =
 					type = "Vec3d",
 				},
 				rigidBodyType = {
-					comment = "Type of rigid body",
+					comment = "Type of rigid body.",
 					type = "RigidBodyObjectType",
 				},
 			}
 		},
 		Gravity = {
-			comment = "",
+			comment = "Component to enable gravity on transform object above.",
       render = "false",
 			fields = {
 				simple = {
-					comment = "",
+					comment = "If simple gravity is true, each object is accelerated towards negative z axis. If false, it uses universal law of gravitation",
 					type = "boolean"
 				},
 				G = {
-					comment = "",
+					comment = "Gravitational",
 					type = "float"
 				},
 			}
@@ -156,7 +156,7 @@ local components =
 			}
 		},
 		SkyBox = {
-			comment = "",
+			comment = "Skybox used in scene.",
       render = "true",
 			fields = {
 				skyboxType = {

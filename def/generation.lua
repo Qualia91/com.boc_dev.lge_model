@@ -24,7 +24,7 @@ os.execute("mkdir ..\\" .. object_folder)
 os.execute("mkdir ..\\" .. folder)
 os.execute("mkdir ..\\" .. enums_folder)
 
-import_locations = { 
+local import_locations = { 
   QuaternionF = "com.boc_dev.maths.objects.QuaternionF",
   QuaternionD = "com.boc_dev.maths.objects.QuaternionD",
   Vec3f = "com.boc_dev.maths.objects.vector.Vec3f",
@@ -36,9 +36,9 @@ import_locations = {
 }
 
 -- components table
-components = require "components"
-enums = require "enums"
-my_io = require "my_io"
+local components = require "components"
+local enums = require "enums"
+local my_io = require "my_io"
 
 
 -- tests the functions above
@@ -250,13 +250,15 @@ function generate_component_class(component_name, component, lines, folder)
   
 end
 
-function generate_component_enum(class_name, enums_names, enums_package)
+function generate_component_enum(enum_name, enum_data, enums_package)
   
-  enum_file_string = "package " .. enums_package .. ";\n\npublic enum " .. class_name .. " {\n"
+  enum_file_string = "package " .. enums_package .. ";\n\n" ..
+                     "/**" .. enum_data.comment .. "\n*/\n" ..
+                     "public enum " .. enum_name .. " {\n"
   
-  for name_count = 1, #enums_names do
+  for name_count = 1, #enum_data.field do
   
-    enum_file_string = enum_file_string .. "\t" .. enums_names[name_count]:upper() .. ",\n"
+    enum_file_string = enum_file_string .. "\t" .. enum_data.field[name_count]:upper() .. ",\n"
   
   end
 
@@ -299,11 +301,11 @@ file:close()
 
 
 -- generate enums
-for k, v in pairs(enums) do
-  enum_file_string = generate_component_enum(k, v, enums_package)
+for enum_name, enums_data in pairs(enums) do
+  enum_file_string = generate_component_enum(enum_name, enums_data, enums_package)
   
   -- Opens a file in append mode
-  file = io.open("..\\" .. enums_folder .. "\\" .. k .. ".java", "w")
+  file = io.open("..\\" .. enums_folder .. "\\" .. enum_name .. ".java", "w")
 
   io.output(file)
 
