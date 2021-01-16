@@ -24,3 +24,4 @@ hs_err_pid*
 .idea/
 /src/main/java/com/boc_dev/lge_model/generated/
 /target/
+/def/documentation/components_markdown.html
