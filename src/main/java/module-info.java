@@ -3,6 +3,9 @@ module com.boc_dev.lge_model {
 	requires com.boc_dev.event_bus;
 
 	opens com.boc_dev.lge_model.generated.components to luaj.jse.module;
+	opens com.boc_dev.lge_model.generated.enums to luaj.jse.module;
+	opens com.boc_dev.lge_model.gcs to luaj.jse.module;
+	opens com.boc_dev.lge_model.systems to luaj.jse.module;
 
 	exports com.boc_dev.lge_model.generated.components;
 	exports com.boc_dev.lge_model.generated.enums;
